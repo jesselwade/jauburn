@@ -3,5 +3,5 @@ Extension { #name : #JbIdentifierExpressionNode }
 { #category : #'*Jauburn-Interpreter' }
 JbIdentifierExpressionNode >> evaluateIn: environment [ 
 
-	^environment at: self identifier
+	^ environment at: (self identifier)
 ]

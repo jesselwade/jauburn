@@ -35,6 +35,11 @@ JbEnvironment >> lookupAt: aKey put: aValue [
 ]
 
 { #category : #accessing }
+JbEnvironment >> outerEnvironment [
+	^ outerEnvironment
+]
+
+{ #category : #accessing }
 JbEnvironment >> outerEnvironment: anEnvironment [
 	outerEnvironment := anEnvironment
 ]

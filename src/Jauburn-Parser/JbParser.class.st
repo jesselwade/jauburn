@@ -139,7 +139,8 @@ Class {
 		'stringExpression',
 		'stringComparisonExpression',
 		'booleanExpression',
-		'functionCallStatement'
+		'functionCallStatement',
+		'whileStatement'
 	],
 	#category : #'Jauburn-Parser-Core'
 }
@@ -375,6 +376,7 @@ JbParser >> keyword [
 	^'if' asParser
 	/ 'else' asParser
 	/ 'function' asParser
+	/ 'while' asParser
 ]
 
 { #category : #expressions }
@@ -416,7 +418,7 @@ JbParser >> start [
 JbParser >> statement [
 
 	^ variableDeclarationStatement / assignmentStatement
-		/ ifElseStatement / ifStatement / returnStatement / functionCallStatement
+		/ ifElseStatement / ifStatement / whileStatement / returnStatement / functionCallStatement
 ]
 
 { #category : #statements }
@@ -460,5 +462,21 @@ JbParser >> variableDeclarationStatement [
 			JbVariableDeclarationStatementNode new
 				identifier: arr second;
 				expression: arr fourth;
+				yourself ]
+]
+
+{ #category : #statements }
+JbParser >> whileStatement [
+
+	^'while' asParser trim
+	, $( asParser trim
+	, expression
+	, $) asParser trim 
+	, statementBlock
+		 ==>
+		[ :arr |
+			JbWhileLoopNode new
+				condition: arr third;
+				trueStatements: arr fifth;
 				yourself ]
 ]

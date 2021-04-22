@@ -9,6 +9,11 @@ Class {
 	#category : #'Jauburn-AST-Core'
 }
 
+{ #category : #converting }
+JbArity2OperatorNode >> asFloat: aNumber [
+	^ (aNumber asFloat)
+]
+
 { #category : #accessing }
 JbArity2OperatorNode >> lhs [
 	^ lhs

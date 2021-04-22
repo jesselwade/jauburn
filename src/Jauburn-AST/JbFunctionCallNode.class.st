@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'identifier',
-		'arguments'
+		'arguments',
+		'return'
 	],
 	#category : #'Jauburn-AST-Core'
 }
@@ -18,6 +19,18 @@ JbFunctionCallNode >> arguments: anObject [
 	arguments := anObject
 ]
 
+{ #category : #api }
+JbFunctionCallNode >> evaluateIn: anEnvironment [
+	
+	^ (anEnvironment at: self identifier) call: arguments in: anEnvironment 
+]
+
+{ #category : #api }
+JbFunctionCallNode >> executeIn: anEnvironment [
+	
+	^ (anEnvironment at: self identifier) call: arguments in: anEnvironment 
+]
+
 { #category : #accessing }
 JbFunctionCallNode >> identifier [
 	^ identifier
@@ -26,4 +39,14 @@ JbFunctionCallNode >> identifier [
 { #category : #accessing }
 JbFunctionCallNode >> identifier: anObject [
 	identifier := anObject
+]
+
+{ #category : #accessing }
+JbFunctionCallNode >> return [ 
+	^ return
+]
+
+{ #category : #accessing }
+JbFunctionCallNode >> return: anObject [ 
+	return := anObject.
 ]

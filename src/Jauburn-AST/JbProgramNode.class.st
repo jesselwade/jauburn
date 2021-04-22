@@ -2,10 +2,21 @@ Class {
 	#name : #JbProgramNode,
 	#superclass : #Object,
 	#instVars : [
-		'statements'
+		'statements',
+		'return'
 	],
 	#category : #'Jauburn-AST-Core'
 }
+
+{ #category : #accessing }
+JbProgramNode >> return [ 
+	^ return
+]
+
+{ #category : #accessing }
+JbProgramNode >> return: anObject [
+	return := anObject
+]
 
 { #category : #accessing }
 JbProgramNode >> statements [

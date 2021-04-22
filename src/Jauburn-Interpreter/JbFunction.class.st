@@ -29,8 +29,19 @@ JbFunction >> body: anObject [
 { #category : #api }
 JbFunction >> call: arguments in: callEnvironment [
 	"You need to implement this method!  arguments will contain the arguments to pass to this function and callEnvironment will contain the environment in place when this function was called."
-	
-	self shouldBeImplemented 
+
+	| env |
+	env := JbEnvironment
+		newFromKeys: self parameters
+		andValues: (arguments collect: [ :a | a evaluateIn: callEnvironment ]).
+	env outerEnvironment: environment.
+
+
+	"create an exception class and on: do: the body loop.
+			take the value from the thrown exception when returning."
+	[ body do: [ :each | each executeIn: env ] ]
+		on: JbReturnValueException
+		do: [ :signal | ^ signal returnValue ]
 ]
 
 { #category : #accessing }
